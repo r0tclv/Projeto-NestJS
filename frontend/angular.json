@@ -3,20 +3,22 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "a642869c-3721-4a6f-a1e1-86b9955b4f17"
+    "analytics": "8cf83b66-a750-47c4-8550-327eaa19b2f1"
   },
   "newProjectRoot": "projects",
   "projects": {
     "frontend": {
       "projectType": "application",
-      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
+
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/frontend",
+            "index": "src/index.html",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -25,16 +27,12 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
           },
+
           "configurations": {
             "production": {
               "budgets": [
@@ -42,23 +40,21 @@
                   "type": "initial",
                   "maximumWarning": "500kB",
                   "maximumError": "1MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
                 }
               ],
               "outputHashing": "all"
             },
+
             "development": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
             }
           },
-          "defaultConfiguration": "production"
+
+          "defaultConfiguration": "development"
         },
+
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
@@ -71,9 +67,11 @@
           },
           "defaultConfiguration": "development"
         },
+
         "test": {
           "builder": "@angular/build:unit-test"
         }
+
       }
     }
   }
